@@ -5,6 +5,7 @@
 package exercicioPokemon;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
 public class GerenciadorPokemon extends javax.swing.JFrame {
     DefaultTableModel modeloMochila;
     DefaultTableModel modeloComputador;
-    ArrayList<Pokemon> = new ArrayList<>();
-    /**
+    ArrayList<Pokemon> listaComputador = new ArrayList<>();
+    ArrayList<Pokemon> listaMochila = new ArrayList<>();    /**
      * Creates new form GerenciadorPokemon
      */
     public GerenciadorPokemon() {
@@ -29,20 +30,22 @@ public class GerenciadorPokemon extends javax.swing.JFrame {
         modeloMochila.addColumn("Nome");
         modeloMochila.addColumn("Tipo");
         modeloMochila.addColumn("Nível");
-        
-        
-        
-        
-        // addRow adiciona uma linha ao modelo
-        modeloComputador.addRow(new Object[]{"Bulbassauro", "Planta", 1});
-        modeloComputador.addRow(new Object[]{"Squirtle", "Agua", 1});
-        modeloComputador.addRow(new Object[]{"Charmander", "Fogo", 1});
-        modeloComputador.addRow(new Object[]{"Pikachu", "Raio", 1});
-        modeloComputador.addRow(new Object[]{"Guyarados", "Agua", 2});
-        modeloComputador.addRow(new Object[]{"Dragonite", "Fogo", 2});
-        
-        // informa que minha tabela vai agora ler os dados do modelo que criei
+        // Atualizar tabela de acordo com o model
         tabelaComputador.setModel(modeloComputador);
+        tabelaMochila.setModel(modeloMochila);
+         
+         // adicionando pokemons ao arrayList
+        listaComputador.add(new Pokemon("Bulbassauro", "Planta", 1));
+        listaComputador.add(new Pokemon("Squirtle", "Agua", 1));
+        listaComputador.add(new Pokemon("Charmander", "Fogo", 1));
+        listaComputador.add(new Pokemon("Pikachu", "Raio", 1));
+        listaComputador.add(new Pokemon("Gyara​dos", "Agua", 2));
+        listaComputador.add(new Pokemon("Dragonite", "Fogo", 2));
+        
+        //Chamando métodos
+        atualizaTabelaComputador();
+        atualizaTabelaMochila();
+
     }
 
     /**
@@ -192,41 +195,55 @@ public class GerenciadorPokemon extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
+        
+        // Seleciono a linha (getSelectedRow()) para altera-la
+       int linha = tabelaComputador.getSelectedRow();
+        if (linha >= 0) {
+            listaMochila.add(listaComputador.get(linha));
+            listaComputador.remove(linha);
+            atualizaTabelaComputador();
+            atualizaTabelaMochila();
+}
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
+        // Seleciono a linha (getSelectedRow()) para altera-la
+        int linha = tabelaMochila.getSelectedRow();
+        if (linha >= 0) {
+            listaComputador.add(listaMochila.get(linha));
+            listaMochila.remove(linha);
+            atualizaTabelaComputador();
+            atualizaTabelaMochila();
+        }
+
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void tabelaComputadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaComputadorMouseClicked
         // TODO add your handling code here:
-        getPokemon();
         
     }//GEN-LAST:event_tabelaComputadorMouseClicked
 
     
-    private void getPokemon() {
+  private void atualizaTabelaComputador() {
+    modeloComputador.setRowCount(0);
     
+    for (int i = 0; i < listaComputador.size(); i++) {
+        Pokemon p = listaComputador.get(i);
+        modeloComputador.addRow(new Object[]{p.getNome(), p.getTipo(), p.getNivel()});
     }
-    
-    private void getValue() { 
-        int row = tabelaComputador.getSelectedRow();
-        int column = tabelaComputador.getSelectedColumn();
-        
-        String cell = modeloComputador.getValueAt(row, column).toString();
-        
-        
-    }
-    
-    private void insertPokemon() {
-        //Armazenar os valores dos campos de texto (textField)
-        getPokemon();
-        
+}
 
-        
-        
-        
-    }
+private void atualizaTabelaMochila() {
+    modeloMochila.setRowCount(0);
+
+for (int i = 0; i < listaMochila.size(); i++) {
+    Pokemon p = listaMochila.get(i);
+    modeloMochila.addRow(new Object[]{p.getNome(), p.getTipo(), p.getNivel()});
+}
+}
+
     /**
      * @param args the command line arguments
      */
