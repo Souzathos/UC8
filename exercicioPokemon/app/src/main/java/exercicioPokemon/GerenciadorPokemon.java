@@ -41,6 +41,7 @@ public class GerenciadorPokemon extends javax.swing.JFrame {
         listaComputador.add(new Pokemon("Pikachu", "Raio", 1));
         listaComputador.add(new Pokemon("Gyara​dos", "Agua", 2));
         listaComputador.add(new Pokemon("Dragonite", "Fogo", 2));
+        listaComputador.add(new Pokemon("JOANA", "Fogo", 2));
         
         //Chamando métodos
         atualizaTabelaComputador();
