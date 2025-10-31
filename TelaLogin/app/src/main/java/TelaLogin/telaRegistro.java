@@ -4,18 +4,21 @@
  */
 package TelaLogin;
 
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ATHOSFELIPENASCIMENT
  */
 public class telaRegistro extends javax.swing.JFrame {
-
     /**
      * Creates new form telaRegistro
      */
     public telaRegistro() {
         initComponents();
         setLocationRelativeTo(null); // Centraliza o JFrame na tela
+        
 
     }
 
@@ -140,6 +143,18 @@ public class telaRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
+        String nome = nameField.getText();
+        String email = emailField.getText();
+        char [] senha = passwordField.getPassword();
+        
+        
+        if(!nome.trim().equals("") && !email.trim().equals("") && !Arrays.equals(senha, new char[]{})) {
+            Usuario usuario = new Usuario(nome, email, senha);
+            Banco.adicionarUsuario(usuario);    
+            
+            JOptionPane.showMessageDialog(this, "Usuario registrado!");
+        }
+         
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

@@ -4,6 +4,8 @@
  */
 package TelaLogin;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ATHOSFELIPENASCIMENT
@@ -29,7 +31,7 @@ public class telaLogin extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         btnRegistrar = new javax.swing.JButton();
         btnEntrar = new javax.swing.JButton();
@@ -39,8 +41,8 @@ public class telaLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Bem-vindo(a)!");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextField1.setText("Digite seu email...");
+        emailField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailField.setText("Digite seu email...");
 
         passwordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         passwordField.setText("jPasswordField1");
@@ -80,7 +82,7 @@ public class telaLogin extends javax.swing.JFrame {
                         .addGap(58, 58, 58)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                        .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                         .addComponent(passwordField)))
                 .addContainerGap(286, Short.MAX_VALUE))
         );
@@ -90,7 +92,7 @@ public class telaLogin extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -128,8 +130,16 @@ public class telaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-        char [] senha = passwordField.getPassword();
-        System.out.println(new String(senha));
+        String email = emailField.getText();
+        char[] senha = passwordField.getPassword();
+        String nome = Banco.autenticar(email, senha).toString();
+        if(Banco.autenticar(email,senha) != null) {
+            new TelaPerfil(email, nome).setVisible(true);
+            this.dispose();
+                    
+        } else {
+            JOptionPane.showMessageDialog(this, "Informações incorretas!");
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
@@ -170,9 +180,9 @@ public class telaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JTextField emailField;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
 }
