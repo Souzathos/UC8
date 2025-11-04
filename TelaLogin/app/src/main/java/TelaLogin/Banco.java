@@ -53,6 +53,7 @@ public class Banco {
     public static boolean deletarUsuario(String email) {
         for(Usuario user : usuarios ) {
             if(user.getEmail().equals(email)) {
+                usuarios.remove(user);
                 return true;
             }
         }

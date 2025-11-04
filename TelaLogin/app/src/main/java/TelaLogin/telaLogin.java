@@ -132,13 +132,14 @@ public class telaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String email = emailField.getText();
         char[] senha = passwordField.getPassword();
-        String nome = Banco.autenticar(email, senha).toString();
-        if(Banco.autenticar(email,senha) != null) {
-            new TelaPerfil(email, nome).setVisible(true);
+        
+        
+        Usuario user = Banco.autenticar(email, senha);
+        if(user != null) {
+            new TelaPerfil(email, user.getNome()).setVisible(true);
             this.dispose();
-                    
         } else {
-            JOptionPane.showMessageDialog(this, "Informações incorretas!");
+            JOptionPane.showMessageDialog(this, "Informações incorretas.");
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
