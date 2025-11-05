@@ -189,20 +189,23 @@ public class TelaPerfil extends javax.swing.JFrame {
        String email = emailField.getText().trim();
        char[] senha = passwordField.getPassword();
 
-      if(!nome.isEmpty() && !email.isEmpty() && senha.length > 0) {
-          Usuario user = Banco.autenticar(email, senha);
-          if(user != null) {
-              new telaLogin().setVisible(true);
-              this.dispose(); //Fechar essa janela
-              Banco.deletarUsuario(user.getEmail());
-              JOptionPane.showMessageDialog(this, "Conta deletada com sucesso!");
-          } else {
-              JOptionPane.showMessageDialog(this, "Informações incorretas.");
+      int resposta = JOptionPane.showConfirmDialog(this, "Confirma a exclusão do usuário?", "Confirmar exclusão", JOptionPane.YES_NO_OPTION);
+      if(resposta == JOptionPane.YES_OPTION) {
+          if(!nome.isEmpty() && !email.isEmpty() && senha.length > 0) {
+            Usuario user = Banco.autenticar(email, senha);
+              if(user != null) {
+                  new telaLogin().setVisible(true);
+                  this.dispose(); //Fechar essa janela
+                  Banco.deletarUsuario(user.getEmail());
+                  JOptionPane.showMessageDialog(this, "Conta deletada com sucesso!");
+              } else {
+                  JOptionPane.showMessageDialog(this, "Informações incorretas.");
+              }
+
           }
-              
-      }
-      else {
-         JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+          else {
+             JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+          }
       }
     }//GEN-LAST:event_btnDeletarContaActionPerformed
 
@@ -210,7 +213,6 @@ public class TelaPerfil extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String novoNome = nameField.getText().trim();
-        
         String novoEmail = emailField.getText().trim();
         char[] novaSenha = passwordField.getPassword();
 
