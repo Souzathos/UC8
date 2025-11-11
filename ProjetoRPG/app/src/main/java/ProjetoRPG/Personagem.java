@@ -11,12 +11,13 @@ import java.util.Random;
  *
  * @author ATHOSFELIPENASCIMENT
  */
-public class Personagem {
+public abstract class Personagem {
     String nome;
     int vida;
     int mana;
     int forca;
     int agilidade;
+    protected int bonusTemporarioDeAcerto = 0;
 
     public Personagem(String nome, int vida, int mana, int forca, int agilidade) {
         this.nome = nome;
@@ -26,38 +27,61 @@ public class Personagem {
         this.agilidade = agilidade;
     }
 
-    private int atacar(Personagem inimigo) {
-        inimigo.vida -= this.forca;
-        return inimigo.vida;
-    }
-    
-    private void usarHabilidade(Personagem inimigo) {
-        
-    }
-    
-    static void usarItem(){
-        int pocaoCura = 25;
-        int pocaoMana = 40;
-        
-    }
-    
-    static void fugir() {
-    
-    }
-    
-    static int rolarDados(int quantidade, int dados) {
-        
-        int quantidadeAleatoria = (int) (Math.random() * 2) + 1;
-        //Gera um numero aleatorio entre 0 e o numero de dados passado na hora de chamar a classe
-        int numeroAleatorio = (int) (Math.random() * 6) + 1;
-        //Multiplica a quantidade dos dados pelo numero que caiu no dado
-        int jogada = quantidade * numeroAleatorio;
-        return jogada;
+    public abstract void usarHabilidade(Personagem inimigo);
+
+    public void atacar(Personagem inimigo) {
+        System.out.println(nome + " tenta atacar " + inimigo.nome + "!");
+        if (calcularAcerto(inimigo)) {
+            int dano = this.forca + rolarDados(1, 6);
+            inimigo.vida -= dano;
+            System.out.println("O ataque acerta e causa " + dano + " de dano!");
+        } else {
+            System.out.println("O ataque erra o alvo!");
+        }
     }
 
+    public boolean calcularAcerto(Personagem inimigo) {
+        int chance = 50 + (this.agilidade - inimigo.agilidade) * 5;
+        chance += this.bonusTemporarioDeAcerto;
 
-    static void calcularChanceDeAcerto(Personagem inimigo){
-       
+        if (chance < 10) chance = 10;
+        if (chance > 95) chance = 95;
+
+        this.bonusTemporarioDeAcerto = 0;
+
+        int sorte = new Random().nextInt(100) + 1;
+        return sorte <= chance;
+    }
+
+    public int rolarDados(int qtd, int lados) {
+        int total = 0;
+        Random rand = new Random();
+        for (int i = 0; i < qtd; i++) {
+            total += rand.nextInt(lados) + 1;
+        }
+        return total;
+    }
+
+    public boolean fugir(Personagem inimigo) {
+        int chanceFuga = 50 + (this.agilidade - inimigo.agilidade) * 5;
+        if (chanceFuga < 10) chanceFuga = 10;
+        if (chanceFuga > 95) chanceFuga = 95;
+
+        int sorte = new Random().nextInt(100) + 1;
+        boolean conseguiu = sorte <= chanceFuga;
+
+        if (conseguiu) {
+            System.out.println(nome + " conseguiu fugir!");
+        } else {
+            System.out.println(nome + " tentou fugir, mas falhou!");
+        }
+
+        return conseguiu;
+    }
+
+    // Getters
+    public boolean estaVivo() {
+        return vida > 0;
     }
     
     public String getNome() {

@@ -8,6 +8,18 @@ package ProjetoRPG;
  *
  * @author ATHOSFELIPENASCIMENT
  */
-public class Inimigo {
+public class Inimigo extends Personagem{
     
+    public Inimigo(String nome) {
+        super(nome, 0, 0, 0, 0);
+        this.vida = rolarDados(2, 6);
+        this.forca = rolarDados(1, 6);
+        this.agilidade = rolarDados(1, 6);
+        this.mana = 0;
+    }
+
+    @Override
+    public void usarHabilidade(Personagem inimigo) {
+        // inimigo genérico não tem habilidade
+    }
 }
