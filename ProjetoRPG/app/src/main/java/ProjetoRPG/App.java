@@ -8,6 +8,23 @@ public class App {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
+        Barbaro jogador = new Barbaro("Athos");
+        Inimigo goblin = new Inimigo("Goblin");
+
+        System.out.println("⚔️ Início do combate entre " + jogador.getNome() + " e " + goblin.getNome() + "\n");
+
+        System.out.println(jogador.usarHabilidade(goblin));
+        System.out.println(jogador.atacar(goblin));
+
+        if (goblin.estaVivo()) {
+            System.out.println(goblin.atacar(jogador));
+        }
+
+        System.out.println(jogador.fugir(goblin));
+        System.out.println("️Vida do jogador: " + jogador.getVida());
+        System.out.println("Vida do inimigo: " + goblin.getVida());
     }
+    
+    
 }

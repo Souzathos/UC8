@@ -18,8 +18,8 @@ public class Inimigo extends Personagem{
         this.mana = 0;
     }
 
-    @Override
-    public void usarHabilidade(Personagem inimigo) {
-        // inimigo genérico não tem habilidade
+    
+    public String usarHabilidade(Personagem inimigo) {
+        return this.nome + " não possui habilidades especiais.";
     }
 }

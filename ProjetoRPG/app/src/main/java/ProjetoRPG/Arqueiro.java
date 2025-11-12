@@ -18,14 +18,14 @@ public class Arqueiro extends Personagem{
         this.agilidade = rolarDados(1, 6) + 3; // RN18
     }
 
-    @Override
-    public void usarHabilidade(Personagem inimigo) {
+
+    public String usarHabilidade(Personagem inimigo) {
         if (this.mana >= 2) {
             this.mana -= 2;
             this.bonusTemporarioDeAcerto = 50; // RN19
-            System.out.println(nome + " prepara um Tiro Preciso!");
+            return nome + " prepara um TIRO PRECISO! (Próximo ataque com +50% de acerto)";
         } else {
-            System.out.println("Mana insuficiente!");
+            return nome + " não tem mana suficiente!";
         }
     }
 }

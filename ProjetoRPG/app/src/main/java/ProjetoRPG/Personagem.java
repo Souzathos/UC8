@@ -27,17 +27,19 @@ public abstract class Personagem {
         this.agilidade = agilidade;
     }
 
-    public abstract void usarHabilidade(Personagem inimigo);
+    // métodos principais
+    public abstract String usarHabilidade(Personagem inimigo);
 
-    public void atacar(Personagem inimigo) {
-        System.out.println(nome + " tenta atacar " + inimigo.nome + "!");
+    public String atacar(Personagem inimigo) {
+        String msg = this.nome + " tenta atacar " + inimigo.nome + "!\n";
         if (calcularAcerto(inimigo)) {
             int dano = this.forca + rolarDados(1, 6);
             inimigo.vida -= dano;
-            System.out.println("O ataque acerta e causa " + dano + " de dano!");
+            msg += "O ataque acerta e causa " + dano + " de dano!";
         } else {
-            System.out.println("O ataque erra o alvo!");
+            msg += "O ataque erra o alvo!";
         }
+        return msg;
     }
 
     public boolean calcularAcerto(Personagem inimigo) {
@@ -49,34 +51,29 @@ public abstract class Personagem {
 
         this.bonusTemporarioDeAcerto = 0;
 
-        int sorte = new Random().nextInt(100) + 1;
+        int sorte = (int) (Math.random() * 100) + 1;
         return sorte <= chance;
     }
 
     public int rolarDados(int qtd, int lados) {
         int total = 0;
-        Random rand = new Random();
         for (int i = 0; i < qtd; i++) {
-            total += rand.nextInt(lados) + 1;
+            total = (int) (Math.random() * lados) + 1; 
         }
         return total;
     }
 
-    public boolean fugir(Personagem inimigo) {
+    public String fugir(Personagem inimigo) {
         int chanceFuga = 50 + (this.agilidade - inimigo.agilidade) * 5;
         if (chanceFuga < 10) chanceFuga = 10;
         if (chanceFuga > 95) chanceFuga = 95;
 
-        int sorte = new Random().nextInt(100) + 1;
-        boolean conseguiu = sorte <= chanceFuga;
-
-        if (conseguiu) {
-            System.out.println(nome + " conseguiu fugir!");
+        int sorte = (int) (Math.random() * 100) + 1;
+        if (sorte <= chanceFuga) {
+            return nome + " conseguiu fugir do combate!";
         } else {
-            System.out.println(nome + " tentou fugir, mas falhou!");
+            return nome + " tentou fugir, mas falhou!";
         }
-
-        return conseguiu;
     }
 
     // Getters

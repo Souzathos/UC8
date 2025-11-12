@@ -18,15 +18,15 @@ public class Mago extends Personagem{
         this.mana = rolarDados(1, 6) + 3; // RN16
     }
 
-    @Override
-    public void usarHabilidade(Personagem inimigo) {
+
+    public String usarHabilidade(Personagem inimigo) {
         if (this.mana >= 2) {
             this.mana -= 2;
             int dano = (this.forca * 2) + rolarDados(1, 6);
             inimigo.vida -= dano;
-            System.out.println(nome + " lança uma magia poderosa e causa " + dano + " de dano!");
+            return nome + " lança uma MAGIA poderosa e causa " + dano + " de dano!";
         } else {
-            System.out.println("Mana insuficiente!");
+            return nome + " não tem mana suficiente!";
         }
     }
 }
