@@ -10,19 +10,15 @@ package ProjetoRPG;
  */
 public class Mago extends Personagem{
     
-    public Mago(String nome) {
-        super(nome, 0, 0, 0, 0);
-        this.vida = rolarDados(3, 6);
-        this.forca = rolarDados(1, 6);
-        this.agilidade = rolarDados(1, 6);
-        this.mana = rolarDados(1, 6) + 3; // RN16
+    public Mago(String nome, int vida, int mana, int forca, int agilidade) {
+        super(nome, vida, mana, forca, agilidade);
     }
 
 
     public String usarHabilidade(Personagem inimigo) {
         if (this.mana >= 2) {
             this.mana -= 2;
-            int dano = (this.forca * 2) + rolarDados(1, 6);
+            int dano = (this.forca * 2) + Dados.rolar(1, 6);
             inimigo.vida -= dano;
             return nome + " lança uma MAGIA poderosa e causa " + dano + " de dano!";
         } else {

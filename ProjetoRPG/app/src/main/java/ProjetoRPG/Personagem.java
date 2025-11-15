@@ -30,96 +30,70 @@ public abstract class Personagem {
     // métodos principais
     public abstract String usarHabilidade(Personagem inimigo);
 
-    public String atacar(Personagem inimigo) {
-        String msg = this.nome + " tenta atacar " + inimigo.nome + "!\n";
+     public String atacar(Personagem inimigo) {
+        String msg = nome + " tenta atacar " + inimigo.nome + "!\n";
+
         if (calcularAcerto(inimigo)) {
-            int dano = this.forca + rolarDados(1, 6);
+            int dano = forca + Dados.rolar(1, 6);
             inimigo.vida -= dano;
             msg += "O ataque acerta e causa " + dano + " de dano!";
         } else {
             msg += "O ataque erra o alvo!";
         }
+
         return msg;
     }
 
+    // ===== Chance de acerto =====
     public boolean calcularAcerto(Personagem inimigo) {
         int chance = 50 + (this.agilidade - inimigo.agilidade) * 5;
-        chance += this.bonusTemporarioDeAcerto;
+
+        chance += bonusTemporarioDeAcerto;
 
         if (chance < 10) chance = 10;
         if (chance > 95) chance = 95;
 
-        this.bonusTemporarioDeAcerto = 0;
+        bonusTemporarioDeAcerto = 0; // limpa o bônus após usar
 
-        int sorte = (int) (Math.random() * 100) + 1;
+        int sorte = (int)(Math.random() * 100) + 1;
+
         return sorte <= chance;
     }
 
+    // ===== Rolar dado usando a classe Dados =====
     public int rolarDados(int qtd, int lados) {
-        int total = 0;
-        for (int i = 0; i < qtd; i++) {
-            total = (int) (Math.random() * lados) + 1; 
-        }
-        return total;
+        return Dados.rolar(qtd, lados);
     }
 
+
+    // ===== Fugir =====
     public String fugir(Personagem inimigo) {
         int chanceFuga = 50 + (this.agilidade - inimigo.agilidade) * 5;
+
         if (chanceFuga < 10) chanceFuga = 10;
         if (chanceFuga > 95) chanceFuga = 95;
 
-        int sorte = (int) (Math.random() * 100) + 1;
+        int sorte = (int)(Math.random() * 100) + 1;
+
         if (sorte <= chanceFuga) {
-            return nome + " conseguiu fugir do combate!";
+            return nome + " conseguiu fugir!";
         } else {
             return nome + " tentou fugir, mas falhou!";
         }
     }
-
-    // Getters
-    public boolean estaVivo() {
-        return vida > 0;
-    }
     
+    
+     // Getters e utilitários
+    public boolean estaVivo() { 
+      return vida > 0; 
+    }
     public String getNome() {
-        return nome;
+        return nome; 
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public int getVida() {
-        return vida;
+        return vida; 
     }
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
-
     public int getMana() {
-        return mana;
+        return mana; 
     }
-
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
-    public int getForca() {
-        return forca;
-    }
-
-    public void setForca(int forca) {
-        this.forca = forca;
-    }
-
-    public int getAgilidade() {
-        return agilidade;
-    }
-
-    public void setAgilidade(int agilidade) {
-        this.agilidade = agilidade;
-    }
-    
-    
 }

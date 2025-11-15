@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 package ProjetoRPG;
+
 
 /**
  *
@@ -10,12 +12,39 @@ package ProjetoRPG;
  */
 public class TelaJogo extends javax.swing.JFrame {
 
+    private String nomePersonagem;
+    private int vidaPersonagem;
+    private int forcaPersonagem;
+    private int agilidadePersonagem;
+    private int manaPersonagem;
+    
+    public TelaJogo() {
+        initComponents();
+        setLocationRelativeTo(null); // Centraliza o JFrame na tela
+
+    }
+    
+    public TelaJogo(String nome, int vida, int forca, int agilidade, int mana) {
+        initComponents();
+        this.nomePersonagem = nome;
+        labelNome.setText("Nome: "  + nome);
+        this.vidaPersonagem = vida;
+        labelVida.setText("Vida: " + vida);
+        this.forcaPersonagem = forca;
+        labelForca.setText("Força: " + String.valueOf(forca));
+        this.agilidadePersonagem = agilidade;
+        labelAgilidade.setText("Agilidade: " + String.valueOf(agilidade));
+        this.manaPersonagem = mana;
+        labelMana.setText("Mana: " + String.valueOf(mana));
+        barraVida.setValue(vida);
+        barraMana.setValue(mana);
+         
+        
+    } 
     /**
      * Creates new form Jogo
      */
-    public TelaJogo() {
-        initComponents();
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,30 +86,30 @@ public class TelaJogo extends javax.swing.JFrame {
 
         labelNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelNome.setForeground(new java.awt.Color(0, 0, 0));
-        labelNome.setText("Nome: Hector");
+        labelNome.setText("Nome: ");
 
         labelVida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelVida.setForeground(new java.awt.Color(0, 0, 0));
-        labelVida.setText("Vida: 50/100");
+        labelVida.setText("Vida:");
 
         labelMana.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelMana.setForeground(new java.awt.Color(0, 0, 0));
-        labelMana.setText("Mana: 30/60");
+        labelMana.setText("Mana: ");
 
         labelForca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelForca.setForeground(new java.awt.Color(0, 0, 0));
-        labelForca.setText("Força: 70");
+        labelForca.setText("Força:");
 
         labelAgilidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelAgilidade.setForeground(new java.awt.Color(0, 0, 0));
-        labelAgilidade.setText("Agilidade: 40");
+        labelAgilidade.setText("Agilidade:");
 
-        barraVida.setBackground(new java.awt.Color(102, 0, 0));
-        barraVida.setForeground(new java.awt.Color(255, 0, 0));
+        barraVida.setBackground(new java.awt.Color(0, 102, 0));
+        barraVida.setForeground(new java.awt.Color(51, 255, 0));
         barraVida.setValue(50);
 
-        barraMana.setBackground(new java.awt.Color(0, 102, 0));
-        barraMana.setForeground(new java.awt.Color(0, 255, 0));
+        barraMana.setBackground(new java.awt.Color(0, 0, 102));
+        barraMana.setForeground(new java.awt.Color(51, 51, 255));
         barraMana.setValue(50);
 
         areaNarrador.setEditable(false);

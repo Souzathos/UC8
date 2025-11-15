@@ -10,12 +10,8 @@ package ProjetoRPG;
  */
 public class Arqueiro extends Personagem{
     
-     public Arqueiro(String nome) {
-        super(nome, 0, 0, 0, 0);
-        this.vida = rolarDados(3, 6);
-        this.mana = rolarDados(1, 6);
-        this.forca = rolarDados(1, 6);
-        this.agilidade = rolarDados(1, 6) + 3; // RN18
+     public Arqueiro(String nome, int vida, int mana, int forca, int agilidade) {
+        super(nome, vida, mana, forca, agilidade);
     }
 
 
@@ -23,7 +19,7 @@ public class Arqueiro extends Personagem{
         if (this.mana >= 2) {
             this.mana -= 2;
             this.bonusTemporarioDeAcerto = 50; // RN19
-            return nome + " prepara um TIRO PRECISO! (Próximo ataque com +50% de acerto)";
+            return nome + " prepara um TIRO PRECISO! (+50% de acerto no próximo ataque)";
         } else {
             return nome + " não tem mana suficiente!";
         }

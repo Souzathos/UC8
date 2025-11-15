@@ -10,12 +10,8 @@ package ProjetoRPG;
  */
 public class Ladino extends Personagem{
     
-      public Ladino(String nome) {
-        super(nome, 0, 0, 0, 0);
-        this.vida = rolarDados(3, 6);
-        this.forca = rolarDados(1, 6);
-        this.agilidade = rolarDados(3, 6) + 4; // RN20
-        this.mana = rolarDados(1, 6);
+      public Ladino(String nome, int vida, int mana, int forca, int agilidade) {
+        super(nome, vida, mana, forca, agilidade);
     }
 
 
@@ -23,11 +19,11 @@ public class Ladino extends Personagem{
         double sorte = Math.random() * 100;
         if (sorte <= 70) {
             inimigo.vida = 0;
-            return this.nome + " usa EVASÃO e escapa do combate!";
+            return nome + " usa EVASÃO e escapa do combate!";
         } else {
-            int dano = (forca + rolarDados(1, 6)) / 2;
+            int dano = (forca + Dados.rolar(1, 6)) / 2;
             inimigo.vida -= dano;
-            return this.nome + " contra-ataca e causa " + dano + " de dano!";
+            return nome + " contra-ataca e causa " + dano + " de dano!";
         }
     }
 }
