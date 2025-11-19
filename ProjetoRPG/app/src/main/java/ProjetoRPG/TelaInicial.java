@@ -9,15 +9,15 @@ package ProjetoRPG;
  * @author HEITORSCHAFERLIMA
  */
 public class TelaInicial extends javax.swing.JFrame {
-    
-    
+
+
     
     private int vidaGerada;
     private int manaGerada;
     private int forcaGerada;
     private int agilidadeGerada;
     
-     private Personagem personagem; // vamos usar depois
+    private Personagem jogador;
     /**
      * Creates new form TelaInicial
      */
@@ -65,7 +65,15 @@ public class TelaInicial extends javax.swing.JFrame {
         fieldNome.setBackground(new java.awt.Color(255, 255, 255));
         fieldNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         fieldNome.setForeground(new java.awt.Color(0, 0, 0));
-        fieldNome.setText("Digite um nome...");
+        fieldNome.setText("Digite o nome do seu personagem...");
+        fieldNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNomeFocusLost(evt);
+            }
+        });
 
         btnComecar.setBackground(new java.awt.Color(0, 204, 0));
         btnComecar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -122,38 +130,35 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(comboClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))))
+                    .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(141, 141, 141))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botaoGerarVida)
-                                    .addComponent(botaoGerarForça))
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botaoGerarAgilidade)
-                                    .addComponent(botaoGerarMana)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(188, 188, 188)
-                                .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(botaoGerarVida)
+                            .addComponent(botaoGerarForça))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botaoGerarAgilidade)
+                            .addComponent(botaoGerarMana))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(167, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
@@ -171,7 +176,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(botaoGerarAgilidade))
                 .addGap(18, 18, 18)
                 .addComponent(btnComecar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(67, 67, 67))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -183,10 +188,11 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,8 +200,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -208,25 +213,24 @@ public class TelaInicial extends javax.swing.JFrame {
         
         switch(classe){
             case "Cavaleiro":
-                Barbaro personagem = new Barbaro(nome,this.vidaGerada, this.manaGerada, this.forcaGerada + 2, this.agilidadeGerada );
+                 jogador = new Barbaro(nome,this.vidaGerada, this.manaGerada, this.forcaGerada + 2, this.agilidadeGerada );
                 break;
                 
             case "Arqueiro": 
-                Arqueiro arqueiro = new Arqueiro(nome, this.vidaGerada, this.manaGerada, this.forcaGerada, this.agilidadeGerada + 3);
+                 jogador = new Arqueiro(nome, this.vidaGerada, this.manaGerada, this.forcaGerada, this.agilidadeGerada + 3);
                 break;
             
             case "Ladino":
-                Ladino ladino = new Ladino(nome, this.vidaGerada, this.manaGerada, this.forcaGerada, this.agilidadeGerada + 4);
+                 jogador = new Ladino(nome, this.vidaGerada, this.manaGerada, this.forcaGerada, this.agilidadeGerada + 4);
                 break;
             
             case "Mago":
-                Mago mago = new Mago(nome, this.vidaGerada, this.manaGerada + 3, this.forcaGerada, this.agilidadeGerada);
+                 jogador = new Mago(nome, this.vidaGerada, this.manaGerada + 3, this.forcaGerada, this.agilidadeGerada);
                 break;
         }
                 
                 
-                
-        new TelaJogo(nome, this.vidaGerada, this.forcaGerada, this.agilidadeGerada, this.manaGerada).setVisible(true);
+        new TelaJogo(this.jogador);
         this.dispose(); 
     }//GEN-LAST:event_btnComecarActionPerformed
 
@@ -262,6 +266,17 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoGerarAgilidade.setText("Agilidade: " + agilidadeGerada);
         
     }//GEN-LAST:event_botaoGerarAgilidadeActionPerformed
+
+    private void fieldNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNomeFocusGained
+        // TODO add your handling code here:
+        if("Digite o nome do seu personagem...".equals(fieldNome.getText())){
+            fieldNome.setText("");
+        }
+    }//GEN-LAST:event_fieldNomeFocusGained
+
+    private void fieldNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNomeFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldNomeFocusLost
 
     /**
      * @param args the command line arguments

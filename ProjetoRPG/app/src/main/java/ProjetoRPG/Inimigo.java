@@ -10,8 +10,12 @@ package ProjetoRPG;
  */
 public class Inimigo extends Personagem{
     
-    public Inimigo(String nome, int vida, int mana, int forca, int agilidade) {
-        super(nome, vida, mana, forca, agilidade);
+     public Inimigo(String nome) {
+        super(nome,
+              Dados.rolar(5, 20),   // vida
+              Dados.rolar(4, 20),   // mana
+              Dados.rolar(3, 20),   // forca
+              Dados.rolar(2, 20));  // agilidade
     }
 
     

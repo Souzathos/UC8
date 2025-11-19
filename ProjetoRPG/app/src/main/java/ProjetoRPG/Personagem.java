@@ -82,6 +82,27 @@ public abstract class Personagem {
         }
     }
     
+    public String usarItem(Item item) {
+        String log = getNome() + " usou " + item.getNome() + "! ";
+
+        if (item.getVidaCurada() > 0) {
+            this.vida += item.getVidaCurada();
+            log += "Recuperou " + item.getVidaCurada() + " de vida. ";
+        }
+
+        if (item.getManaCurada() > 0) {
+            this.mana += item.getManaCurada();
+            log += "Recuperou " + item.getManaCurada() + " de mana. ";
+        }
+
+        if (item.getBuffForca() > 0) {
+            this.forca += item.getBuffForca();
+            log += "Ganhou +" + item.getBuffForca() + " de força. ";
+        }
+
+        return log;
+    }
+
     
      // Getters e utilitários
     public boolean estaVivo() { 
@@ -95,5 +116,13 @@ public abstract class Personagem {
     }
     public int getMana() {
         return mana; 
+    }
+    
+    public int getForca() {
+        return forca;
+    }
+    
+    public int getAgilidade(){
+        return agilidade;
     }
 }

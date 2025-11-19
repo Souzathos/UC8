@@ -12,11 +12,9 @@ package ProjetoRPG;
  */
 public class TelaJogo extends javax.swing.JFrame {
 
-    private String nomePersonagem;
-    private int vidaPersonagem;
-    private int forcaPersonagem;
-    private int agilidadePersonagem;
-    private int manaPersonagem;
+
+    
+    Personagem personagem;
     
     public TelaJogo() {
         initComponents();
@@ -24,20 +22,16 @@ public class TelaJogo extends javax.swing.JFrame {
 
     }
     
-    public TelaJogo(String nome, int vida, int forca, int agilidade, int mana) {
+    public TelaJogo(Personagem jogador) {
         initComponents();
-        this.nomePersonagem = nome;
-        labelNome.setText("Nome: "  + nome);
-        this.vidaPersonagem = vida;
-        labelVida.setText("Vida: " + vida);
-        this.forcaPersonagem = forca;
-        labelForca.setText("Força: " + String.valueOf(forca));
-        this.agilidadePersonagem = agilidade;
-        labelAgilidade.setText("Agilidade: " + String.valueOf(agilidade));
-        this.manaPersonagem = mana;
-        labelMana.setText("Mana: " + String.valueOf(mana));
-        barraVida.setValue(vida);
-        barraMana.setValue(mana);
+        this.personagem = jogador;
+        labelNome.setText("Nome: "  + jogador.getNome());
+        labelVida.setText("Vida: " + jogador.getVida());
+        labelForca.setText("Força: " + String.valueOf(jogador.getForca()));
+        labelAgilidade.setText("Agilidade: " + String.valueOf(jogador.getAgilidade()));;
+        labelMana.setText("Mana: " + String.valueOf(jogador.getMana()));
+        barraVida.setValue(jogador.getVida());
+        barraMana.setValue(jogador.getMana());
          
         
     } 
@@ -131,6 +125,11 @@ public class TelaJogo extends javax.swing.JFrame {
         btnOpcao2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnOpcao2.setForeground(new java.awt.Color(0, 0, 0));
         btnOpcao2.setText("Direita");
+        btnOpcao2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpcao2ActionPerformed(evt);
+            }
+        });
 
         btnRolarDados.setBackground(new java.awt.Color(204, 204, 204));
         btnRolarDados.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -220,6 +219,13 @@ public class TelaJogo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOpcao2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcao2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Batalha(this.personagem);
+        
+    }//GEN-LAST:event_btnOpcao2ActionPerformed
 
     /**
      * @param args the command line arguments
