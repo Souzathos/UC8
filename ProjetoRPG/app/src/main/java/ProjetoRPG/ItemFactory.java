@@ -50,7 +50,6 @@ public class ItemFactory {
                     Dados.rolar(1, 6) // tira força do inimigo
                 );
         }
-
         return null; 
     }
 }
