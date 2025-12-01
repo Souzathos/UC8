@@ -4,6 +4,7 @@
  */
 package tratamentoDeExcessoes;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
@@ -81,6 +82,11 @@ public class Leitor extends javax.swing.JFrame {
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
         // TODO add your handling code here:
         int resultado = fileChooser.showOpenDialog(this);
+        if(resultado == JFileChooser.APPROVE_OPTION){
+            File arquivo = fileChooser.getSelectedFile();
+            
+            
+        }
     }//GEN-LAST:event_btnAbrirActionPerformed
 
     /**
